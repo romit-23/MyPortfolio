@@ -18,19 +18,23 @@ try {
   await page.getByRole('heading', { name: 'Engineering intelligence.' }).waitFor();
   await page.waitForTimeout(600);
   assert.equal(await page.title(), 'Romit Addagatla — Python AI Engineer');
-  assert.equal(await page.locator('.project-card').count(), 3);
+  assert.equal(await page.locator('.project-card').count(), 4);
   assert.equal(await page.locator('.timeline-row').count(), 3);
   await page.screenshot({ path: new URL('desktop-hero.png', artifactPath).pathname });
   const visibleText = await page.locator('body').innerText();
-  for (const removed of ['GPT-5.4', 'Vision Transformers', 'IndicTrans2', 'TTSMMS', 'News, beyond language', 'Orbital', 'GTM', 'SMB', 'lead scoring', 'data enrichment']) {
+  for (const removed of ['RAG Pipeline for Hotels', 'Chatbots', 'GPT-5.4', 'Vision Transformers', 'IndicTrans2', 'TTSMMS', 'News, beyond language', 'Orbital', 'GTM', 'SMB', 'lead scoring', 'data enrichment']) {
     assert.equal(visibleText.includes(removed), false, `Removed claim: ${removed}`);
   }
-  assert.match(visibleText, /concurrent agent workflows/);
-  assert.match(visibleText, /structured and unstructured data/);
-  checks.push('Updated resume content, three projects, three roles, and no removed claims');
+  assert.doesNotMatch(visibleText, /\bNER\b/);
+  assert.match(visibleText, /Shipped production multi-agent AI systems/);
+  assert.match(visibleText, /persistent memory for context-aware retrieval/);
+  assert.match(visibleText, /agricultural imagery/);
+  assert.match(visibleText, /Four projects/);
+  checks.push('Shared resume content, four projects, three roles, and no removed claims');
 
   const expected = [
-    ['RAG Pipeline for Hotels', 'https://github.com/romit-23/RAG-Model-for-Hotels'],
+    ['JobApply', 'https://github.com/romit-23/jobapply'],
+    ['Research Reader', 'https://github.com/romit-23/research-reader'],
     ['Financial Fraud Detection System', 'https://github.com/romit-23/Fraud-Detection-Model'],
     ['GuardNet', 'https://github.com/romit-23/GuardNet'],
   ];
@@ -44,6 +48,14 @@ try {
     const style = await dialog.evaluate(el => { const s = getComputedStyle(el); return { className:el.className, position:s.position, top:s.top, left:s.left, translate:s.translate, transform:s.transform, opacity:s.opacity, zIndex:s.zIndex }; });
     assert(box.x >= 0 && box.y >= 0 && box.x + box.width <= 1441 && box.y + box.height <= 1001, `Dialog inside viewport: ${JSON.stringify({box, style})}`);
     assert.equal(await dialog.getByRole('link', { name: 'View source on GitHub' }).getAttribute('href'), link);
+    if (title === 'JobApply') {
+      await expect(dialog).toContainText('five job boards');
+      await expect(dialog).toContainText('deduplication ledger');
+    }
+    if (title === 'Research Reader') {
+      await expect(dialog).toContainText('Markdown notes with export');
+      await expect(dialog).toContainText('Groq, DeepSeek, and Ollama');
+    }
     if (title === 'GuardNet') {
       assert.equal(await dialog.getByRole('link', { name: 'IEEE publication' }).getAttribute('href'), 'https://ieeexplore.ieee.org/document/11284226');
       await page.screenshot({ path: new URL('project-detail.png', artifactPath).pathname });
@@ -71,7 +83,10 @@ try {
   assert.equal((await resume.body()).subarray(0, 5).toString(), '%PDF-');
   const sourceResume = await fs.readFile(new URL('../site/public/Romit-Addagatla-Resume.pdf', import.meta.url));
   assert.deepEqual(await resume.body(), sourceResume);
-  checks.push('Download serves the updated PDF generated from resume.txt');
+  const legacyResume = await context.request.get(new URL('./ML-Resume-Romit-2026.pdf', page.url()).href);
+  assert.equal(legacyResume.status(), 200);
+  assert.deepEqual(await legacyResume.body(), sourceResume);
+  checks.push('Both resume URLs serve the exact shared Google Drive PDF');
 
   await page.getByRole('button', { name: 'Copy email address' }).click();
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), 'addromit2307@gmail.com');

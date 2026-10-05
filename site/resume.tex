@@ -1,3 +1,5 @@
+% Content mirror of the resume shared on October 6, 2026.
+% The portfolio publishes the original Google Drive PDF, not a recompilation.
 \documentclass[10pt, letterpaper]{article}
 
 \usepackage[
@@ -136,10 +138,10 @@
     \vspace{0.03 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Designed and shipped \textbf{multi-agent AI systems} in production using \textbf{LangChain}, \textbf{LangGraph}, and \textbf{LangSmith} for orchestration, real-time monitoring, and latency optimization across concurrent agent workflows.
-            \item Designed \textbf{clickable AI suggestion cards} as a first-class response pattern, significantly improving user discoverability and engagement with agentic outputs.
-            \item Built \textbf{LLM-ready web-scraping data pipelines} replacing unreliable PDFs, creating a scalable foundation for advanced RAG; proactively audited APIs and resolved production data-quality issues end-to-end.
-            \item Drove \textbf{GPT model upgrade} via comparative benchmark analysis; re-engineered image upscaling pipeline, resolving hallucination defects and delivering native 2K/4K output quality in production.
+            \item Shipped production \textbf{multi-agent AI systems} with \textbf{LangChain}, \textbf{LangGraph}, and \textbf{LangSmith} for orchestration, monitoring, and latency optimization.
+            \item Designed \textbf{clickable AI suggestion cards} as a first-class response pattern, improving discoverability and engagement.
+            \item Built \textbf{LLM-ready web-scraping pipelines} replacing unreliable PDFs, a scalable foundation for RAG; audited APIs and fixed production data-quality issues.
+            \item Drove \textbf{GPT model upgrade} via benchmark analysis; re-engineered image upscaling pipeline, fixing hallucination defects and delivering native 2K/4K output.
         \end{highlights}
     \end{onecolentry}
 
@@ -151,9 +153,9 @@
     \vspace{0.03 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Built \textbf{ADFactors}, a multi-agent PR generation system using \textbf{LangChain} and \textbf{LangGraph}; integrated compliance agents, \textbf{web search}, and PDF generation with cross-functional team collaboration.
-            \item Monitored agent performance with \textbf{LangSmith}; reduced pipeline latency by replacing high-latency reasoning models with task-optimised alternatives, improving end-to-end response throughput.
-            \item Developed \textbf{REST APIs} with \textbf{FastAPI}, \textbf{PostgreSQL}, and \textbf{pgvector}; built \textbf{RAG systems} with persistent memory, enabling context-aware retrieval over structured and unstructured data sources.
+            \item Built \textbf{ADFactors}, a multi-agent PR generation system with \textbf{LangChain} and \textbf{LangGraph}; integrated compliance agents, web search, and PDF generation.
+            \item Monitored agents with \textbf{LangSmith}; cut pipeline latency by replacing high-latency reasoning models with task-optimised alternatives.
+            \item Developed \textbf{REST APIs} with \textbf{FastAPI}, \textbf{PostgreSQL}, and \textbf{pgvector}; built \textbf{RAG systems} with persistent memory for context-aware retrieval.
         \end{highlights}
     \end{onecolentry}
 
@@ -165,48 +167,59 @@
     \vspace{0.03 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Applied \textbf{MLOps} practices with \textbf{MLflow} for experiment tracking and model versioning; deployed models via \textbf{FastAPI} and \textbf{Docker}; explored \textbf{LLMs} for intelligent automation in a research setting.
-            \item Conducted computer vision research using \textbf{PyTorch} and \textbf{Transformers} for high-performance agricultural image modeling.
+            \item Applied \textbf{MLOps} with \textbf{MLflow}; deployed models via \textbf{FastAPI} and \textbf{Docker}; researched computer vision with \textbf{PyTorch} and \textbf{Transformers} for agricultural imagery; explored LLMs for automation.
         \end{highlights}
     \end{onecolentry}
 
     \section{Projects}
 
-        \begin{twocolentry}{\href{https://github.com/romit-23/RAG-Model-for-Hotels}{github.com/romit-23/RAG-Model-for-Hotels}}
-            \textbf{RAG Pipeline for Hotels}
+        \begin{twocolentry}{\href{https://github.com/romit-23/jobapply}{GitHub}}
+            \textbf{JobApply: AI Job Search \& Resume Tailoring CLI}
         \end{twocolentry}
         \vspace{0.03 cm}
         \begin{onecolentry}
             \begin{highlights}
-                \item Built an end-to-end \textbf{RAG pipeline} for hotel booking insights using \textbf{FAISS}, \textbf{Mistral-7B} (Hugging Face), and \textbf{LangChain}; deployed with \textbf{FastAPI} and \textbf{Docker} as a production-grade API.
-                \item Performed comprehensive \textbf{data cleaning and EDA} to improve retrieval quality and downstream LLM response accuracy.
-                \item \textbf{Tools:} LangChain, FAISS, Mistral-7B, FastAPI, Docker $|$ \textbf{Keywords:} RAG, Semantic Search, Vector Databases
+                \item Worked on a multi-agent CLI that searches 5 job boards, scores fit, and tailors resumes and cover letters per role; checkpointed pipeline, dedupe ledger, pluggable LLM providers (Gemini, OpenAI, Anthropic, Ollama), and a web UI.
+                \item \textbf{Stack:} LangGraph, FastAPI, React, SQLite, Pydantic
             \end{highlights}
         \end{onecolentry}
 
         \vspace{0.06 cm}
 
-        \begin{twocolentry}{\href{https://github.com/romit-23/Fraud-Detection-Model}{github.com/romit-23/Fraud-Detection-Model}}
+        \begin{twocolentry}{\href{https://github.com/romit-23/research-reader}{GitHub}}
+            \textbf{Research Reader: PDF Annotation \& AI Paper Exploration}
+        \end{twocolentry}
+        \vspace{0.03 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built a full-stack paper reader with PDF highlights and comments, Markdown notes with export, and AI explain, Q\&A and summaries via Gemini, OpenAI, Anthropic, Groq, DeepSeek or Ollama.
+                \item \textbf{Stack:} React, TypeScript, PDF.js, FastAPI, SQLAlchemy, JWT
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.06 cm}
+
+        \begin{twocolentry}{\href{https://github.com/romit-23/Fraud-Detection-Model}{GitHub}}
             \textbf{Financial Fraud Detection System}
         \end{twocolentry}
         \vspace{0.03 cm}
         \begin{onecolentry}
             \begin{highlights}
-                \item Built ML model on 6.3M transactions (0.13\% fraud rate) using \textbf{Random Forest} \& \textbf{XGBoost} with \textbf{SMOTE} for class imbalance; engineered domain-specific features to improve precision and recall.
-                \item Evaluated models using \textbf{AUC-ROC} and \textbf{F1} metrics on high-volume structured transaction data.
+                \item Built an ML model on 6.3M transactions (0.13\% fraud rate) with domain-specific features and class-imbalance handling to improve precision and recall.
+                \item \textbf{Stack:} Random Forest, XGBoost, SMOTE, AUC-ROC, F1
             \end{highlights}
         \end{onecolentry}
 
         \vspace{0.06 cm}
 
-        \begin{twocolentry}{\href{https://github.com/romit-23/GuardNet}{github.com/romit-23/GuardNet}}
+        \begin{twocolentry}{\href{https://github.com/romit-23/GuardNet}{GitHub} $|$ \href{https://ieeexplore.ieee.org/document/11284226}{IEEE}}
             \textbf{GuardNet: Violence Detection in Public Surveillance}
         \end{twocolentry}
         \vspace{0.03 cm}
         \begin{onecolentry}
             \begin{highlights}
                 \item Hybrid deep learning model (ConvNeXt-Tiny + LSTM + attention) for real-time CCTV violence detection; \href{https://ieeexplore.ieee.org/document/11284226}{published at IEEE}.
-                \item \textbf{Tools:} PyTorch, ConvNeXt, LSTM, OpenCV, CUDA $|$ \textbf{Keywords:} Computer Vision, Temporal Modeling, Deep Learning
+                \item \textbf{Stack:} PyTorch, ConvNeXt, LSTM, OpenCV, CUDA
             \end{highlights}
         \end{onecolentry}
 
@@ -217,7 +230,7 @@
         \end{onecolentry}
         \vspace{0.06 cm}
         \begin{onecolentry}
-            \textbf{Agentic AI \& Orchestration:} LangChain, LangGraph, LangSmith, Multi-Agent Systems, RAG, Semantic Search, Chatbots, NER
+            \textbf{Agentic AI \& Orchestration:} LangChain, LangGraph, LangSmith, Multi-Agent Systems, RAG, Semantic Search
         \end{onecolentry}
         \vspace{0.06 cm}
         \begin{onecolentry}
@@ -229,17 +242,17 @@
         \end{onecolentry}
         \vspace{0.06 cm}
         \begin{onecolentry}
-            \textbf{ML Frameworks:} PyTorch, TensorFlow, Keras, Scikit-learn, Transformers, SpaCy, NLTK, NumPy, Pandas $|$ \textbf{MLOps:} MLflow
+            \textbf{ML Frameworks:} PyTorch, TensorFlow, Keras, Scikit-learn, Transformers, SpaCy, NLTK
         \end{onecolentry}
         \vspace{0.06 cm}
         \begin{onecolentry}
-            \textbf{Data Viz:} Matplotlib, Seaborn, Plotly, Tableau
+            \textbf{Data \& MLOps:} NumPy, Pandas, MLflow, Matplotlib, Seaborn, Plotly, Tableau
         \end{onecolentry}
 
     \section{Education}
 
         \begin{twocolentry}{2021 -- 2025}
-            \textbf{SIES Graduate School of Technology}, B.Tech in Artificial Intelligence And Machine Learning
+            \textbf{SIES Graduate School of Technology}, B.Tech in AI \& Machine Learning
         \end{twocolentry}
 
 \end{document}

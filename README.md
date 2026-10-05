@@ -31,10 +31,10 @@ The build first creates `.build/`, then copies the finished static HTML, assets,
 
 - `site/app/page.tsx`: professional content and interactive components.
 - `site/app/globals.css`: colors, layout, responsiveness, and animation.
-- `site/public/Romit-Addagatla-Resume.pdf`: the PDF compiled from the supplied `resume.txt` source.
+- `site/public/Romit-Addagatla-Resume.pdf`: the exact PDF supplied through [Google Drive](https://drive.google.com/file/d/1usb3TlPHBtoR4Z3ScONdjTCy2A6WqPtc/view), updated on October 6, 2026.
 - `site/index.html`: page metadata and favicon.
-- `site/resume.tex`: the supplied LaTeX resume source, copied from `resume.txt`.
+- `site/resume.tex`: an editable LaTeX content mirror of the shared resume. The original supplied PDF is the published download; the site build does not regenerate it from this source.
 
-The built root `index.html` is generated; edit `site/index.html` instead. The previous `ML-Resume-Romit-2026.pdf` filename is retained as an alias serving the latest compiled PDF.
+The built root `index.html` is generated; edit `site/index.html` instead. The previous `ML-Resume-Romit-2026.pdf` filename is retained as an alias serving the same supplied PDF. When replacing the resume, update both PDFs in `site/public/` before building.
 
 Browser checks can run with `PORTFOLIO_URL=http://127.0.0.1:4173/MyPortfolio npm run verify` while the production preview is running. They use an installed Google Chrome browser. Screenshots are saved in the ignored `outputs/` directory.
