@@ -364,3 +364,11 @@ h2 { font-size: clamp(33px, 3.55vw, 48px); line-height: 1.15; letter-spacing: -.
   .rag-connector { width: 34px; }
   .retrieval-query { padding-inline: 12px; font-size: 11px; }
 }
+
+/* Give the final project a full-width presentation when the collection is odd. */
+@media (min-width: 601px) {
+  .projects-grid > [data-reveal]:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .projects-grid > [data-reveal]:last-child:nth-child(odd) .project-card { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center; }
+  .projects-grid > [data-reveal]:last-child:nth-child(odd) .project-content { padding: 24px 26px; }
+  .projects-grid > [data-reveal]:last-child:nth-child(odd) .project-visual { height: 280px; }
+}

@@ -18,16 +18,21 @@ try {
   await page.getByRole('heading', { name: 'Engineering intelligence.' }).waitFor();
   await page.waitForTimeout(600);
   assert.equal(await page.title(), 'Romit Addagatla — Python AI Engineer');
-  assert.equal(await page.locator('.project-card').count(), 4);
+  assert.equal(await page.locator('.project-card').count(), 3);
   assert.equal(await page.locator('.timeline-row').count(), 3);
   await page.screenshot({ path: new URL('desktop-hero.png', artifactPath).pathname });
-  checks.push('Desktop route, title, four projects, and three experience entries');
+  const visibleText = await page.locator('body').innerText();
+  for (const removed of ['GPT-5.4', 'Vision Transformers', 'IndicTrans2', 'TTSMMS', 'News, beyond language', 'Orbital', 'GTM', 'SMB', 'lead scoring', 'data enrichment']) {
+    assert.equal(visibleText.includes(removed), false, `Removed claim: ${removed}`);
+  }
+  assert.match(visibleText, /concurrent agent workflows/);
+  assert.match(visibleText, /structured and unstructured data/);
+  checks.push('Updated resume content, three projects, three roles, and no removed claims');
 
   const expected = [
+    ['RAG Pipeline for Hotels', 'https://github.com/romit-23/RAG-Model-for-Hotels'],
+    ['Financial Fraud Detection System', 'https://github.com/romit-23/Fraud-Detection-Model'],
     ['GuardNet', 'https://github.com/romit-23/GuardNet'],
-    ['RAG for Hotels', 'https://github.com/romit-23/RAG-Model-for-Hotels'],
-    ['Financial Fraud Detection', 'https://github.com/romit-23/Fraud-Detection-Model'],
-    ['News, beyond language', 'https://github.com/romit-23/News-translation-and-TTS'],
   ];
   for (const [title, link] of expected) {
     const trigger = page.getByRole('button', { name: `Explore ${title}`, exact: true });
@@ -53,7 +58,7 @@ try {
   await page.getByRole('tabpanel').getByText('PostgreSQL', { exact: true }).waitFor();
   await page.getByRole('tab', { name: 'Tools & deployment' }).click();
   await page.getByRole('tabpanel').getByText('MLflow', { exact: true }).waitFor();
-  await page.getByRole('tab', { name: 'AI & machine learning' }).click();
+  await page.getByRole('tab', { name: 'Agentic AI & ML' }).click();
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('tab', { name: 'Backend & data' })).toHaveAttribute('data-state', 'active');
   checks.push('Skills tabs and keyboard navigation');
@@ -66,7 +71,7 @@ try {
   assert.equal((await resume.body()).subarray(0, 5).toString(), '%PDF-');
   const sourceResume = await fs.readFile(new URL('../site/public/Romit-Addagatla-Resume.pdf', import.meta.url));
   assert.deepEqual(await resume.body(), sourceResume);
-  checks.push('Download serves the unchanged original resume PDF');
+  checks.push('Download serves the updated PDF generated from resume.txt');
 
   await page.getByRole('button', { name: 'Copy email address' }).click();
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), 'addromit2307@gmail.com');

@@ -31,9 +31,10 @@ The build first creates `.build/`, then copies the finished static HTML, assets,
 
 - `site/app/page.tsx`: professional content and interactive components.
 - `site/app/globals.css`: colors, layout, responsiveness, and animation.
-- `site/public/Romit-Addagatla-Resume.pdf`: the unchanged supplied resume.
+- `site/public/Romit-Addagatla-Resume.pdf`: the PDF compiled from the supplied `resume.txt` source.
 - `site/index.html`: page metadata and favicon.
+- `site/resume.tex`: the supplied LaTeX resume source, copied from `resume.txt`.
 
-The built root `index.html` is generated; edit `site/index.html` instead. The previous `ML-Resume-Romit-2026.pdf` filename is retained as an alias serving the latest supplied PDF.
+The built root `index.html` is generated; edit `site/index.html` instead. The previous `ML-Resume-Romit-2026.pdf` filename is retained as an alias serving the latest compiled PDF.
 
 Browser checks can run with `PORTFOLIO_URL=http://127.0.0.1:4173/MyPortfolio npm run verify` while the production preview is running. They use an installed Google Chrome browser. Screenshots are saved in the ignored `outputs/` directory.

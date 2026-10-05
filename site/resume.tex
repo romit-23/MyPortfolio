@@ -1,0 +1,245 @@
+\documentclass[10pt, letterpaper]{article}
+
+\usepackage[
+    ignoreheadfoot,
+    top=1.2 cm,
+    bottom=1.2 cm,
+    left=1.6 cm,
+    right=1.6 cm,
+    footskip=0.6 cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Romit Addagatla's CV},
+    pdfauthor={Romit Addagatla},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage[pscoord]{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{3\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{0.5pt}\titlerule]
+\titlespacing{\section}{-1pt}{0.15 cm}{0.1 cm}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.03 cm,
+        parsep=0.03 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{0 cm + 0.00001 cm}{0 cm + 0.00001 cm}
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.2}
+}{
+    \par\kern\topsep
+}
+
+\let\hrefWithoutArrow\href
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+
+\hypersetup{colorlinks=true, linkcolor={blue!80!black}, urlcolor={blue!80!black}}
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{22 pt}{22 pt}\selectfont Romit Addagatla
+        \vspace{2 pt}
+        \normalsize
+        {
+\hypersetup{urlcolor=black}
+\begin{tabular}{c c c}
+            \mbox{{\footnotesize\faMapMarker*}\hspace*{0.13cm}Mumbai, India} &
+            \mbox{\hrefWithoutArrow{mailto:addromit2307@gmail.com}{{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}addromit2307@gmail.com}} &
+            \mbox{\hrefWithoutArrow{tel:+91-8169655123}{{\footnotesize\faPhone*}\hspace*{0.13cm}+91 8169655123}} \\
+            \mbox{\hrefWithoutArrow{https://romit-23.github.io/MyPortfolio/}{{\footnotesize\faLink}\hspace*{0.13cm}romit-23.github.io/MyPortfolio}} &
+            \mbox{\hrefWithoutArrow{https://linkedin.com/in/romit-addagatla}{{\footnotesize\faLinkedinIn}\hspace*{0.13cm}linkedin.com/in/romit-addagatla}} &
+            \mbox{\hrefWithoutArrow{https://github.com/romit-23}{{\footnotesize\faGithub}\hspace*{0.13cm}github.com/romit-23}} \\
+        \end{tabular}
+}
+    \end{header}
+
+    \vspace{2 pt}
+
+    \section{Summary}
+
+    \begin{onecolentry}
+        AI Engineer with hands-on production experience designing and shipping multi-agent AI systems using \textbf{LangChain}, \textbf{LangGraph}, and \textbf{LangSmith}. Proven track record building RAG pipelines, autonomous agent workflows, and REST APIs deployed at scale with \textbf{FastAPI} and \textbf{Docker}.
+    \end{onecolentry}
+
+    \section{Experience}
+
+    \begin{twocolentry}{\hfill Feb 2026 -- Present}
+        \textbf{Python AI Engineer} \textit{at \textbf{Arcitech.ai, Navi Mumbai}}
+    \end{twocolentry}
+    \vspace{0.03 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Designed and shipped \textbf{multi-agent AI systems} in production using \textbf{LangChain}, \textbf{LangGraph}, and \textbf{LangSmith} for orchestration, real-time monitoring, and latency optimization across concurrent agent workflows.
+            \item Designed \textbf{clickable AI suggestion cards} as a first-class response pattern, significantly improving user discoverability and engagement with agentic outputs.
+            \item Built \textbf{LLM-ready web-scraping data pipelines} replacing unreliable PDFs, creating a scalable foundation for advanced RAG; proactively audited APIs and resolved production data-quality issues end-to-end.
+            \item Drove \textbf{GPT model upgrade} via comparative benchmark analysis; re-engineered image upscaling pipeline, resolving hallucination defects and delivering native 2K/4K output quality in production.
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.08 cm}
+
+    \begin{twocolentry}{\hfill Dec 2025 -- Feb 2026}
+        \textbf{Python AI Intern} \textit{at \textbf{Arcitech.ai, Navi Mumbai}}
+    \end{twocolentry}
+    \vspace{0.03 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Built \textbf{ADFactors}, a multi-agent PR generation system using \textbf{LangChain} and \textbf{LangGraph}; integrated compliance agents, \textbf{web search}, and PDF generation with cross-functional team collaboration.
+            \item Monitored agent performance with \textbf{LangSmith}; reduced pipeline latency by replacing high-latency reasoning models with task-optimised alternatives, improving end-to-end response throughput.
+            \item Developed \textbf{REST APIs} with \textbf{FastAPI}, \textbf{PostgreSQL}, and \textbf{pgvector}; built \textbf{RAG systems} with persistent memory, enabling context-aware retrieval over structured and unstructured data sources.
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.08 cm}
+
+    \begin{twocolentry}{\hfill Aug 2025 -- Oct 2025}
+        \textbf{AI/ML Intern} \textit{at \textbf{Annam.ai, IIT Ropar}} -- Center of Excellence in Digital Agriculture
+    \end{twocolentry}
+    \vspace{0.03 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Applied \textbf{MLOps} practices with \textbf{MLflow} for experiment tracking and model versioning; deployed models via \textbf{FastAPI} and \textbf{Docker}; explored \textbf{LLMs} for intelligent automation in a research setting.
+            \item Conducted computer vision research using \textbf{PyTorch} and \textbf{Transformers} for high-performance agricultural image modeling.
+        \end{highlights}
+    \end{onecolentry}
+
+    \section{Projects}
+
+        \begin{twocolentry}{\href{https://github.com/romit-23/RAG-Model-for-Hotels}{github.com/romit-23/RAG-Model-for-Hotels}}
+            \textbf{RAG Pipeline for Hotels}
+        \end{twocolentry}
+        \vspace{0.03 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built an end-to-end \textbf{RAG pipeline} for hotel booking insights using \textbf{FAISS}, \textbf{Mistral-7B} (Hugging Face), and \textbf{LangChain}; deployed with \textbf{FastAPI} and \textbf{Docker} as a production-grade API.
+                \item Performed comprehensive \textbf{data cleaning and EDA} to improve retrieval quality and downstream LLM response accuracy.
+                \item \textbf{Tools:} LangChain, FAISS, Mistral-7B, FastAPI, Docker $|$ \textbf{Keywords:} RAG, Semantic Search, Vector Databases
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.06 cm}
+
+        \begin{twocolentry}{\href{https://github.com/romit-23/Fraud-Detection-Model}{github.com/romit-23/Fraud-Detection-Model}}
+            \textbf{Financial Fraud Detection System}
+        \end{twocolentry}
+        \vspace{0.03 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built ML model on 6.3M transactions (0.13\% fraud rate) using \textbf{Random Forest} \& \textbf{XGBoost} with \textbf{SMOTE} for class imbalance; engineered domain-specific features to improve precision and recall.
+                \item Evaluated models using \textbf{AUC-ROC} and \textbf{F1} metrics on high-volume structured transaction data.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.06 cm}
+
+        \begin{twocolentry}{\href{https://github.com/romit-23/GuardNet}{github.com/romit-23/GuardNet}}
+            \textbf{GuardNet: Violence Detection in Public Surveillance}
+        \end{twocolentry}
+        \vspace{0.03 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Hybrid deep learning model (ConvNeXt-Tiny + LSTM + attention) for real-time CCTV violence detection; \href{https://ieeexplore.ieee.org/document/11284226}{published at IEEE}.
+                \item \textbf{Tools:} PyTorch, ConvNeXt, LSTM, OpenCV, CUDA $|$ \textbf{Keywords:} Computer Vision, Temporal Modeling, Deep Learning
+            \end{highlights}
+        \end{onecolentry}
+
+    \section{Technologies}
+
+        \begin{onecolentry}
+            \textbf{Languages:} Python, JavaScript, SQL, Bash, HTML
+        \end{onecolentry}
+        \vspace{0.06 cm}
+        \begin{onecolentry}
+            \textbf{Agentic AI \& Orchestration:} LangChain, LangGraph, LangSmith, Multi-Agent Systems, RAG, Semantic Search, Chatbots, NER
+        \end{onecolentry}
+        \vspace{0.06 cm}
+        \begin{onecolentry}
+            \textbf{LLMs:} GPT-4, Llama-3, Claude 3, Mistral-7B $|$ Generative AI, Prompt Engineering, Retrieval-Augmented Generation
+        \end{onecolentry}
+        \vspace{0.06 cm}
+        \begin{onecolentry}
+            \textbf{Tools \& Platforms:} FastAPI, Docker, AWS, Git/GitHub, Django $|$ \textbf{Databases:} PostgreSQL, pgvector, MySQL, FAISS
+        \end{onecolentry}
+        \vspace{0.06 cm}
+        \begin{onecolentry}
+            \textbf{ML Frameworks:} PyTorch, TensorFlow, Keras, Scikit-learn, Transformers, SpaCy, NLTK, NumPy, Pandas $|$ \textbf{MLOps:} MLflow
+        \end{onecolentry}
+        \vspace{0.06 cm}
+        \begin{onecolentry}
+            \textbf{Data Viz:} Matplotlib, Seaborn, Plotly, Tableau
+        \end{onecolentry}
+
+    \section{Education}
+
+        \begin{twocolentry}{2021 -- 2025}
+            \textbf{SIES Graduate School of Technology}, B.Tech in Artificial Intelligence And Machine Learning
+        \end{twocolentry}
+
+\end{document}
