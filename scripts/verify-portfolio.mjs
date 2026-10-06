@@ -15,7 +15,7 @@ try {
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   const response = await page.goto(`${base}/`, { waitUntil: 'networkidle' });
   assert.equal(response.status(), 200);
-  await page.getByRole('heading', { name: 'Engineering intelligence.' }).waitFor();
+  await page.getByRole('heading', { name: 'Romit Addagatla', level: 1, exact: true }).waitFor();
   await page.waitForTimeout(600);
   assert.equal(await page.title(), 'Romit Addagatla — Python AI Engineer');
   assert.equal(await page.locator('.project-card').count(), 4);
@@ -156,7 +156,7 @@ try {
   reducedPage.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   await reducedPage.goto(`${base}/`, { waitUntil: 'networkidle' });
   assert.equal(await reducedPage.locator('.ticker-track').evaluate(el => getComputedStyle(el).animationName), 'none');
-  assert.equal(await reducedPage.getByRole('heading', { name: 'Engineering intelligence.' }).evaluate(el => getComputedStyle(el).opacity), '1');
+  assert.equal(await reducedPage.getByRole('heading', { name: 'Romit Addagatla', level: 1, exact: true }).evaluate(el => getComputedStyle(el).opacity), '1');
   await reducedPage.locator('.robot-head').scrollIntoViewIfNeeded();
   await reducedPage.mouse.move(0, 0);
   assert.equal(await reducedPage.locator('.robot-float').evaluate(el => getComputedStyle(el).animationName), 'none');
