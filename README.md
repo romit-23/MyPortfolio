@@ -4,6 +4,8 @@ Live address: https://romit-23.github.io/MyPortfolio/
 
 This replaces the previous portfolio in the same repository and preserves its GitHub Pages address. It uses the exact resume-based portfolio design with Motion animations, responsive project panels, accessible navigation, and reduced-motion support.
 
+The hero features a floating robot whose head and eyes follow the cursor across the page. Its greeting works with mouse, touch, and keyboard; reduced-motion preferences and the motion toggle disable tracking and idle animation.
+
 ## Run locally
 
 Run these commands inside this repository, where `package.json` lives:
@@ -30,6 +32,7 @@ The build first creates `.build/`, then copies the finished static HTML, assets,
 ## Edit
 
 - `site/app/page.tsx`: professional content and interactive components.
+- `site/components/robot-companion.tsx`: the cursor-following hero robot and greeting interaction.
 - `site/app/globals.css`: colors, layout, responsiveness, and animation.
 - `site/public/Romit-Addagatla-Resume.pdf`: the exact PDF supplied through [Google Drive](https://drive.google.com/file/d/1usb3TlPHBtoR4Z3ScONdjTCy2A6WqPtc/view), updated on October 6, 2026.
 - `site/index.html`: page metadata and favicon.

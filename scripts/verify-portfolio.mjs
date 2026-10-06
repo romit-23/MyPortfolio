@@ -32,6 +32,26 @@ try {
   assert.match(visibleText, /Four projects/);
   checks.push('Shared resume content, four projects, three roles, and no removed claims');
 
+  assert.equal(await page.locator('.agent-diagram').count(), 0);
+  const robot = page.locator('.robot-scene');
+  await robot.waitFor();
+  const robotBox = await robot.boundingBox();
+  const headOffset = () => page.locator('.robot-head').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
+  const gazeOffset = () => page.locator('.robot-gaze').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
+  await page.mouse.move(20, robotBox.y + robotBox.height * 0.44);
+  await expect.poll(headOffset).toBeLessThan(-5);
+  await expect.poll(gazeOffset).toBeLessThan(-8);
+  await page.mouse.move(1420, robotBox.y + robotBox.height * 0.44);
+  await expect.poll(headOffset).toBeGreaterThan(3);
+  await expect.poll(gazeOffset).toBeGreaterThan(4);
+  await page.evaluate(() => window.dispatchEvent(new Event('blur')));
+  await expect.poll(async () => Math.abs(await headOffset())).toBeLessThan(0.1);
+  await page.getByRole('button', { name: 'Say hello to the robot' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.robot-greeting')).toHaveText('Hey there, human.');
+  await expect(page.locator('.robot-greeting')).toBeEmpty({ timeout: 4000 });
+  checks.push('Robot head and eyes follow the cursor across the page, reset on blur, and greet keyboard users');
+
   const expected = [
     ['JobApply', 'https://github.com/romit-23/jobapply'],
     ['Research Reader', 'https://github.com/romit-23/research-reader'],
@@ -92,8 +112,12 @@ try {
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), 'addromit2307@gmail.com');
   await page.getByRole('button', { name: 'Pause decorative animations' }).click();
   assert.equal(await page.locator('.ticker-track').evaluate(el => getComputedStyle(el).animationPlayState), 'paused');
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page.mouse.move(20, 250);
+  await expect.poll(async () => Math.abs(await headOffset())).toBeLessThan(0.1);
+  assert.equal(await page.locator('.robot-float').evaluate(el => getComputedStyle(el).animationPlayState), 'paused');
   await page.getByRole('button', { name: 'Resume decorative animations' }).click();
-  checks.push('Email clipboard action and decorative animation pause');
+  checks.push('Email clipboard action and motion pause also freezes robot tracking and idle animation');
 
   await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
   for (const width of [1440, 1024, 768, 390, 320]) {
@@ -133,7 +157,25 @@ try {
   await reducedPage.goto(`${base}/`, { waitUntil: 'networkidle' });
   assert.equal(await reducedPage.locator('.ticker-track').evaluate(el => getComputedStyle(el).animationName), 'none');
   assert.equal(await reducedPage.getByRole('heading', { name: 'Engineering intelligence.' }).evaluate(el => getComputedStyle(el).opacity), '1');
-  checks.push('Reduced-motion preference disables continuous animation and keeps content visible');
+  await reducedPage.locator('.robot-head').scrollIntoViewIfNeeded();
+  await reducedPage.mouse.move(0, 0);
+  assert.equal(await reducedPage.locator('.robot-float').evaluate(el => getComputedStyle(el).animationName), 'none');
+  await expect.poll(() => reducedPage.locator('.robot-head').evaluate(el => Math.abs(new DOMMatrix(getComputedStyle(el).transform).m41))).toBeLessThan(0.1);
+  await reducedPage.getByRole('button', { name: 'Say hello to the robot' }).click();
+  await expect(reducedPage.locator('.robot-greeting')).toHaveText('Hey there, human.');
+  checks.push('Reduced-motion disables robot tracking and continuous animation while keeping greetings available');
+
+  const touchContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const touchPage = await touchContext.newPage();
+  touchPage.on('pageerror', error => errors.push(error.message));
+  await touchPage.goto(`${base}/`, { waitUntil: 'networkidle' });
+  await expect(touchPage.locator('.robot-touch-hint')).toBeVisible();
+  await touchPage.getByRole('button', { name: 'Say hello to the robot' }).tap();
+  await expect(touchPage.locator('.robot-greeting')).toHaveText('Hey there, human.');
+  assert.equal(await touchPage.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+  await touchPage.locator('.robot-panel').screenshot({ path: new URL('robot-touch.png', artifactPath).pathname });
+  await touchContext.close();
+  checks.push('Robot greeting and interaction hint work on touch screens');
   assert.deepEqual(errors, [], 'No browser runtime errors');
   checks.push('No browser runtime errors');
   console.log(JSON.stringify({ passed: checks, screenshots: artifactPath.pathname }, null, 2));
